@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { DataService } from '../core/data.service';
 import { startWith, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-hero-form-reactive',
@@ -13,7 +14,7 @@ import { startWith, switchMap } from 'rxjs';
 })
 export class HeroFormReactiveComponent implements OnInit {
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private http: HttpClient) {}
 
   form = new FormGroup({});
   model = {
@@ -27,12 +28,21 @@ export class HeroFormReactiveComponent implements OnInit {
   fields: FormlyFieldConfig[];
 
   ngOnInit(): void {
+    // this.http.get<FormlyFieldConfig[]>('/dynamic-form.json')
+    //   .subscribe(fields => {
+    //     this.fields = fields;
+    //   });
+
     this.fields = [
+      {
+        key: 'id'
+      },
       {
         key: 'firstname',
         type: 'input',
         templateOptions: {
-          label: 'First Name'
+          label: 'Firstname',
+          required: true
         }
       },
       {
@@ -40,12 +50,19 @@ export class HeroFormReactiveComponent implements OnInit {
         type: 'input',
         templateOptions: {
           type: 'number',
-          label: 'Age'
+          label: 'Age',
+          min: 18
+        },
+        validation: {
+          messages: {
+            min: 'Sorry, you have to be older than 18'
+          }
         }
       },
       {
         key: 'nationId',
-        type: 'select',
+        // type: 'my-autocomplete',
+        type: 'select', // <select>
         templateOptions: {
           label: 'Nation',
           options: this.dataService.getNations()
@@ -53,7 +70,7 @@ export class HeroFormReactiveComponent implements OnInit {
       },
       {
         key: 'cityId',
-        type: 'select',
+        type: 'select', // <select>
         templateOptions: {
           label: 'Cities',
           options: []
@@ -62,6 +79,7 @@ export class HeroFormReactiveComponent implements OnInit {
           'templateOptions.disabled': model => !model.nationId,
           'model.cityId': '!model.nationId ? null : model.cityId'
         },
+        hideExpression: model => !model.nationId,
         hooks: {
           onInit: (field: FormlyFieldConfig) => {
             field.props.options = field.form
@@ -70,6 +88,22 @@ export class HeroFormReactiveComponent implements OnInit {
                 startWith(this.model.nationId),
                 switchMap(nationId => this.dataService.getCities(nationId))
               );
+          }
+        }
+      },
+      {
+        key: 'ip',
+        type: 'input',
+        templateOptions: {
+          label: 'IP Address',
+          required: true
+        },
+        validators: {
+          // validation: ['ip']
+          ip2: {
+            expression: (c: { value: string; }) => !c.value || /(\d{1,3}\.){3}\d{1,3}/.test(c.value),
+            message: (error: any, field: FormlyFieldConfig) =>
+              `"${field.formControl.value}" is not valid`
           }
         }
       }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 export class DataService {
   constructor() {}
 
-  getNations() {
+  getNations(): Observable<any> {
     return of([
       {
         value: null,
@@ -28,7 +28,7 @@ export class DataService {
     ]);
   }
 
-  getCities(nationId: number = null) {
+  getCities(nationId: number = null): Observable<any> {
     return of(
       [
         {
