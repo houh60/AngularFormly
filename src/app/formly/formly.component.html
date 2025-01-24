@@ -1,0 +1,12 @@
+<div class="container">
+  <form [formGroup]="constactForm" (ngSubmit)="submitForm(contactModel)">
+    <formly-form [model]="contactModel" [fields]="contactFields" [form]="constactForm"></formly-form>
+    <button mat-raised-button type="submit" color="primary" [disabled]="constactForm.invalid">Submit Form</button>
+  </form>
+</div>
+
+<div class="code">
+  <h1>Model</h1>
+  <pre>Contact: {{ contactModel | json }}</pre>
+  <pre>From is valid: {{ constactForm.valid ? 'Yes' : 'No' }}</pre>
+</div>
