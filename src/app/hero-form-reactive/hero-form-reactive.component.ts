@@ -62,7 +62,7 @@ export class HeroFormReactiveComponent implements OnInit {
       {
         key: 'nationId',
         // type: 'my-autocomplete',
-        type: 'select', // <select>
+        type: 'select',
         templateOptions: {
           label: 'Nation',
           options: this.dataService.getNations()
@@ -70,7 +70,7 @@ export class HeroFormReactiveComponent implements OnInit {
       },
       {
         key: 'cityId',
-        type: 'select', // <select>
+        type: 'select',
         templateOptions: {
           label: 'Cities',
           options: []

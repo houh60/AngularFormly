@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 // @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-
 body {
   margin: 0;
   padding: 0;
@@ -17,10 +16,27 @@ body {
   float: right;
 }
 
-.examples {
-  margin-left: 20px;
+// .toobar-button {
+//   height: 100%;
+//   display: flex;
+//   align-items: center;
+// }
+
+a {
+  padding: 0 10px;
+}
+
+a:hover {
+  color: red;
 }
 
 .container {
   margin: 20px;
+}
+
+.mat-accent {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: cyan;
 }
