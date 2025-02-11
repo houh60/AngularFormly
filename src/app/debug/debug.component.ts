@@ -26,7 +26,7 @@ export class DebugComponent implements OnInit {
     this.isExpanded = sessionStorage.getItem("debug-expanded") === "true";
   }
 
-  onExpandedChange(isExpanded) {
+  onExpandedChange(isExpanded: string) {
     sessionStorage.setItem("debug-expanded", isExpanded);
   }
 }

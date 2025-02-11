@@ -5,3 +5,10 @@ a {
 mat-toolbar {
   font-size: 15px;
 }
+
+.mat-accent {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: cyan;
+}

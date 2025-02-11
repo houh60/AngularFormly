@@ -19,6 +19,11 @@ import { TranslateLoader, TranslateModule, TranslateService, TranslateStore } fr
 import { registerTranslateExtension } from './translate.extension';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -46,6 +51,7 @@ export function IpValidator(control: FormControl): ValidationErrors {
     HeroFormReactiveComponent,
     DebugComponent,
     NgSelectTypeComponent,
+    CreateEmployeeComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +101,9 @@ export function IpValidator(control: FormControl): ValidationErrors {
         deps: [HttpClient]
       }
     }),
+    FormlyMatDatepickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     provideAnimationsAsync(),
